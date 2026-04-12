@@ -48,7 +48,7 @@ void loop() {
     micLevel += abs(sampleBuffer[i]);
   }
   micLevel = micLevel / samplesRead;
-  bool sound = (micLevel > 750);       // microphone threshold
+  bool sound = (micLevel > 130);       // microphone threshold
 
   // Modality 2: Light (ambient brightness)
   int r = 0, g = 0, b = 0, clear = 0;
@@ -64,14 +64,14 @@ void loop() {
     IMU.readAcceleration(x, y, z);
     motion = abs(x) + abs(y) + abs(z);
   }
-  bool moving = (motion > 2.0);         // IMU threshold
+  bool moving = (motion > 1.5);         // IMU threshold
 
   // Modality 4: Proximity (presence near board)
   int prox = 0;
   if (APDS.proximityAvailable()) {
     prox = APDS.readProximity();
   }
-  bool near = (prox > 100);             // proximity threshold
+  bool near = (prox < 100);             // proximity threshold
 
 
   // State based on overall system
